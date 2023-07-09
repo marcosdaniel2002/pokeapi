@@ -1,0 +1,25 @@
+// SETTINGS (variables and functions)
+@import '00-settings/settings';
+
+// TOOLS (mixins, breakpoints)
+@import '01-tools/tools';
+
+// GENERIC (normalize)
+@import '02-generic/generic';
+
+// ELEMENTS (h1 h2 h3 body nav div)
+@import '03-elements/elements';
+
+// OBJECTS
+@import '04-objects/colors';
+@import '04-objects/pokeball';
+@import '04-objects/pokemontypes';
+
+// COMPONENTS
+@import '05-components/buttons';
+@import '05-components/card';
+@import '05-components/main-nav';
+@import '05-components/slider';
+
+// UTILITIES (margin, padding, oppacity, display)
+@import '06-utilities/utilitites';

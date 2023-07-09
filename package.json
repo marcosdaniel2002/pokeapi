@@ -1,0 +1,20 @@
+{
+  "name": "03_pokeapi",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "marcosdaniel",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.9.3",
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "core-js": "^3.31.1",
+    "regenerator-runtime": "^0.13.11"
+  }
+}

@@ -1,0 +1,16 @@
+@each $key, $val in $colors {
+  .btn-#{$key} {
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    border: 0;
+    padding: toEm(24) toEm(24) * 2;
+    border-radius: toEm(30);
+    background-color: $val;
+    transition: all 0.5s;
+
+    &:hover {
+      background-color: lighten($val, 5);
+    }
+  }
+}

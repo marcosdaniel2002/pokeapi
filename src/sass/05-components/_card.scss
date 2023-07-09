@@ -1,0 +1,28 @@
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2vw;
+}
+
+.card {
+  font-size: 0.9rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: toEm(180);
+  margin: toEm(5);
+
+  &__capture {
+    width: toEm(40);
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &__image {
+    width: toEm(200);
+  }
+}

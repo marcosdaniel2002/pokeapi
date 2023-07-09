@@ -1,0 +1,101 @@
+// .child-to-body {
+//   width: 300px;
+//   height: 400px;
+//   flex-shrink: 0;
+//   background-color: red;
+// }
+
+// .poke_box {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   -webkit-transform: translate(-50%, -50%);
+//   transform: translate(-50%, -50%);
+// }
+
+.pokeball {
+  font-size: 0.23em;
+  cursor: pointer;
+  position: relative;
+  width: toEm(150);
+  height: toEm(150);
+  background: #fff;
+  border: toEm(5) solid #000;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: inset toEm(-10) toEm(10) 0 toEm(10) #ccc;
+  animation: shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+  animation-play-state: paused;
+
+  &:hover .pokeball__button {
+    animation-play-state: running;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0, 0) rotate(0);
+  }
+  20% {
+    transform: translate(toEm(-10), 0) rotate(-20deg);
+  }
+  30% {
+    transform: translate(toEm(10), 0) rotate(20deg);
+  }
+  50% {
+    transform: translate(toEm(-10), 0) rotate(-10deg);
+  }
+  60% {
+    transform: translate(toEm(10), 0) rotate(10deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+
+.pokeball::before,
+.pokeball::after {
+  content: '';
+  position: absolute;
+}
+
+.pokeball::before {
+  background: red;
+  width: 100%;
+  height: 50%;
+}
+
+.pokeball::after {
+  top: calc(50% - toEm(5));
+  width: 100%;
+  height: toEm(10);
+  background: #000;
+}
+
+.pokeball__button {
+  position: absolute;
+  width: toEm(30);
+  height: toEm(30);
+  border: toEm(4) solid #7f8c8d;
+  border-radius: 50%;
+  top: calc(50% - toEm(15));
+  left: calc(50% - toEm(15));
+  box-shadow: 0 0 0 toEm(7) black;
+  background: #fff;
+  z-index: 10;
+  animation: blink 0.5s alternate infinite;
+  animation-play-state: paused;
+}
+
+.pokeball-animated {
+  animation-play-state: running;
+}
+
+@keyframes blink {
+  from {
+    background: #eee;
+  }
+  to {
+    background: #e74c3c;
+  }
+}
