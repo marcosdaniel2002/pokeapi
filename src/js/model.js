@@ -8,6 +8,8 @@ export const state = {
     pokemons: [],
     resultPokemons: [],
     resultsPerPage: RES_PER_PAGE,
+    page: 1,
+    numOfPages: '',
   },
   pokemonDetail: {},
 };
@@ -48,17 +50,25 @@ export const loadPokemons = async function (genNumber) {
     state.searchGenerations.pokemons = data.map(poke =>
       poke.url.match(/(?<=[\/])\d{1,}/g).join('')
     );
-
-    console.log(state.searchGenerations.pokemons);
+    getNumberOfPages();
+    console.log(state.searchGenerations.numOfPages);
   } catch (err) {
     throw err;
   }
 };
 
-export const resultsPerPage = function (pageNumber) {
+export const resultsPerPage = function (pageNumber = 1) {
+  state.searchGenerations.page = pageNumber;
   const start = (pageNumber - 1) * state.searchGenerations.resultsPerPage;
   const end = pageNumber * state.searchGenerations.resultsPerPage;
   return state.searchGenerations.resultPokemons.slice(start, end);
+};
+
+const getNumberOfPages = function () {
+  state.searchGenerations.numOfPages = Math.ceil(
+    state.searchGenerations.pokemons.length /
+      state.searchGenerations.resultsPerPage
+  );
 };
 
 // ([\/][0-9]{1,})

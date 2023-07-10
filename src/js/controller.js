@@ -5,6 +5,7 @@ import * as model from './model.js';
 import generationView from './views/generationView.js';
 import sliderView from './views/sliderView.js';
 import resultPokemonsView from './views/resultPokemonsView.js';
+import paginationView from './views/paginationView.js';
 
 const controlShowGenerations = async function () {
   try {
@@ -21,17 +22,28 @@ const controlShowGenerations = async function () {
 
 const controlSearchPokemons = async function (genNumber) {
   try {
+    // load pokemons of any generation
     await model.loadPokemons(genNumber);
     await model.loadResultPokemons();
-    resultPokemonsView.render(model.resultsPerPage(2));
+
+    // render pokemons per page
+    resultPokemonsView.render(model.resultsPerPage(1));
+
+    // render pagination initial
+    paginationView.render(model.state.searchGenerations);
   } catch (err) {
     console.error(err);
   }
 };
 
+const controlPagination = function (goToPage) {
+  resultPokemonsView.render(model.resultsPerPage(goToPage));
+};
+
 const init = function () {
   controlShowGenerations();
   sliderView.addHandlerSlider(controlSearchPokemons);
+  paginationView.addHandlerClick(controlPagination);
 };
 init();
 

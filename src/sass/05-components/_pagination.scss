@@ -1,0 +1,53 @@
+.pagination {
+  $gray: map-get($colors, 'gray');
+  font-size: 0.8rem;
+  //   width: toEm(300);
+  margin: 0 auto;
+  //   background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: toEm(12);
+  padding: toEm(20);
+  border-radius: toEm(8);
+  //   box-shadow: 0 toEm(5) toEm(10) rgba(0, 0, 0, 0.1);
+  &__button {
+    border: none;
+    &:disabled {
+      color: mix(white, $gray, 70);
+      pointer-events: none;
+    }
+  }
+
+  &__links,
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link,
+  &__button {
+    font-size: 0.8em;
+    width: toEm(45);
+    height: toEm(45);
+    color: $gray;
+    background-color: mix(white, $gray, 90);
+    border-radius: toEm(6);
+    cursor: pointer;
+
+    &:hover {
+      color: white;
+      background-color: $tertiary;
+    }
+  }
+
+  &__links {
+    column-gap: toEm(12);
+  }
+
+  &__link.active {
+    color: white;
+    background-color: $tertiary;
+  }
+}
