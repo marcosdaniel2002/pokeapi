@@ -14,3 +14,12 @@
   visibility: hidden;
   opacity: 0;
 }
+
+.fixed {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.display-none {
+  display: none;
+}

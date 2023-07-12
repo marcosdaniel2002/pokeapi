@@ -30,6 +30,14 @@ class ResultPokemonsView extends View {
     </div>
     `;
   }
+
+  addHandlerCardDetail(handler) {
+    this._parentElement.addEventListener('click', e => {
+      const card = e.target.closest('.card');
+      if (!card) return;
+      handler(card.dataset.id);
+    });
+  }
 }
 
 export default new ResultPokemonsView();

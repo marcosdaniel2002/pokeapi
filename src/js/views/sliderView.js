@@ -1,20 +1,24 @@
 import View from './View';
 
-class SliderView extends View {
-  _parentElement = document.querySelector('.slider');
+export class SliderView extends View {
+  constructor(parent, arrayOfMarkups, numberSlider = 0) {
+    super();
+    this._parentElement = parent;
+    this.render(arrayOfMarkups);
+    this._activeSlider(numberSlider);
+  }
 
-  // constructor(slides) {
-  //   this._slides = slides;
-  //   this._addHandlerArrows();
-  //   this._goToSlide(0);
-  // }
   _generateMarkup() {
     return `
-    <div class="slider">
-      ${this._data}
+      ${this._data
+        .map(
+          (d, i) => `
+      <div class="slide slide--${i + 1}">${d}</div>
+      `
+        )
+        .join('')}
       <button class="slider__btn slider__btn--left">&larr;</button>
       <button class="slider__btn slider__btn--right">&rarr;</button>
-    </div>
     `;
   }
 
@@ -47,26 +51,13 @@ class SliderView extends View {
     );
   }
 
-  activeSlider() {
-    this._btnRight = document.querySelector('.slider__btn--right');
-    this._btnLeft = document.querySelector('.slider__btn--left');
-    this._slides = document.querySelectorAll('.slide');
+  _activeSlider(start) {
+    this._btnRight = this._parentElement.querySelector('.slider__btn--right');
+    this._btnLeft = this._parentElement.querySelector('.slider__btn--left');
+    this._slides = this._parentElement.querySelectorAll('.slide');
     this._curSlide = 0;
     this._maxSlide = this._slides.length;
     this._addHandlerArrows();
-    this._goToSlide(0);
-  }
-
-  addHandlerSlider(handler) {
-    this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn-generation');
-
-      if (!btn) return;
-      const goToGeneration = btn.dataset.goToGeneration;
-
-      handler(goToGeneration);
-    });
+    this._goToSlide(start);
   }
 }
-
-export default new SliderView();

@@ -1,0 +1,66 @@
+.container-slider-2 {
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  // position: absolute;
+  // z-index: 1000;
+}
+.slider-card-detail {
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  width: 60%;
+  min-width: toEm(375);
+}
+
+.card-detail {
+  font-size: 1.2rem;
+  position: relative;
+  width: toEm(280);
+  height: toEm(420);
+  background-color: white;
+  box-shadow: 0 toEm(5) toEm(10) rgba(0, 0, 0, 0.1);
+  padding: toEm(15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: toEm(10);
+
+  &__btn-close {
+    font-size: 1.5em;
+    position: absolute;
+    right: toEm(8);
+    top: toEm(8);
+    width: toEm(15);
+    height: toEm(15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background: none;
+    transition: all 0.5s;
+    &:hover {
+      background-color: mix(black, white, 20);
+    }
+  }
+
+  &__number {
+    position: absolute;
+    left: toEm(15);
+    color: map-get($colors, 'gray');
+  }
+
+  &__image {
+    width: toEm(200);
+  }
+
+  &__description {
+    font-size: 0.8em;
+  }
+}

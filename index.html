@@ -22,17 +22,16 @@
         <div class="pokeball__button"></div>
       </div>
     </nav>
-    <div class="slider">
-      <div class="slide slide--1">
+    <div class="slider slider-generations">
+      <!-- <div class="slide slide--1">
         <button class="btn-generation btn-secondary">x.x</button>
       </div>
-      <button class="slider__btn slider__btn--left">&larr;</button>
-      <button class="slider__btn slider__btn--right">&rarr;</button>
-      <div class="dots"></div>
+      <button class="slider-generations__btn--left">&larr;</button>
+      <button class="slider-generations__btn--right">&rarr;</button> -->
     </div>
 
     <div class="cards">
-      <div class="card">
+      <div class="card" data-id="132">
         <img
           class="card__capture"
           src="src/images/Pokebola-pokeball-png-0.png"
@@ -49,7 +48,7 @@
           <div class="pkm-type fighting"><span>Fighting</span></div>
         </div>
       </div>
-      <div class="card">
+      <div class="card" data-id="58">
         <img
           class="card__capture"
           src="src/images/Pokebola-pokeball-png-0.png"
@@ -66,7 +65,7 @@
           <div class="pkm-type fighting"><span>Fighting</span></div>
         </div>
       </div>
-      <div class="card">
+      <div class="card" data-id="58">
         <img
           class="card__capture"
           src="src/images/Pokebola-pokeball-png-0.png"
@@ -83,7 +82,7 @@
           <div class="pkm-type fighting"><span>Fighting</span></div>
         </div>
       </div>
-      <div class="card">
+      <div class="card" data-id="58">
         <img
           class="card__capture"
           src="src/images/Pokebola-pokeball-png-0.png"
@@ -123,6 +122,41 @@
       <button class="pagination__button" id="endBtn">
         <i class="fa-solid fa-angle-right"></i>
       </button> -->
+    </div>
+
+    <div class="overlay hidden"></div>
+
+    <div class="slider slider-card-detail hidden">
+      <!-- <div class="slide slide--1">
+          <div class="card-detail">
+            <button class="card-detail__btn-close">&times;</button>
+            <span class="card-detail__number">#0058</span>
+            <img
+              class="card-detail__image"
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/58.png"
+              alt=""
+            />
+            <div class="card-detail__card_types">
+              <div class="pkm-type fire"><span>Fire</span></div>
+              <div class="pkm-type fighting"><span>Fighting</span></div>
+            </div>
+            <span class="card-detail__description"
+              >They patrol their territory in pairs. I believe the igneous rock
+              components in the fur of this species are the result of volcanic
+              activity in its habitat.</span
+            >
+            <button class="card-detail__button-capture btn-quaternary">
+              Capture
+            </button>
+            <button
+              class="card-detail__button-release btn-primary display-none"
+            >
+              Release
+            </button>
+          </div>
+        </div> -->
+      <button class="slider__btn slider__btn--left">&larr;</button>
+      <button class="slider__btn slider__btn--right">&rarr;</button>
     </div>
   </body>
 </html>

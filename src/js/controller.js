@@ -3,21 +3,15 @@ import 'regenerator-runtime/runtime'; // for old browsers
 
 import * as model from './model.js';
 import generationView from './views/generationView.js';
-import sliderView from './views/sliderView.js';
 import resultPokemonsView from './views/resultPokemonsView.js';
 import paginationView from './views/paginationView.js';
+import detailsView from './views/detailsView.js';
 
 const controlShowGenerations = async function () {
   try {
     await model.loadGenerations();
-    const markup = generationView.load(
-      model.state.searchGenerations.generations
-    );
-    sliderView.render(markup);
-    sliderView.activeSlider();
-  } catch (err) {
-    sliderView.renderError(err);
-  }
+    generationView.load(model.state.searchGenerations.generations);
+  } catch (err) {}
 };
 
 const controlSearchPokemons = async function (genNumber) {
@@ -40,11 +34,15 @@ const controlPagination = function (goToPage) {
   resultPokemonsView.render(model.resultsPerPage(goToPage));
 };
 
+const controlDetails = async function (id) {
+  await model.loadPokemonDetail(id);
+  detailsView.load(model.state.pokemonDetail, id);
+};
+
 const init = function () {
   controlShowGenerations();
-  sliderView.addHandlerSlider(controlSearchPokemons);
+  generationView.addHandlerGenerationView(controlSearchPokemons);
   paginationView.addHandlerClick(controlPagination);
+  resultPokemonsView.addHandlerCardDetail(controlDetails);
 };
 init();
-
-// sliderView;

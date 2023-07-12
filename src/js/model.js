@@ -1,6 +1,11 @@
 // import { async } from 'regenerator-runtime';
 import { API_URL, RES_PER_PAGE } from './config';
-import { getGenerations, getPokemonsGeneration, getPokemon } from './helpers';
+import {
+  getGenerations,
+  getPokemonsGeneration,
+  getPokemon,
+  getPokemonDetail,
+} from './helpers';
 
 export const state = {
   searchGenerations: {
@@ -11,7 +16,7 @@ export const state = {
     page: 1,
     numOfPages: '',
   },
-  pokemonDetail: {},
+  pokemonDetail: [],
 };
 
 export const loadResultPokemons = async function () {
@@ -19,7 +24,6 @@ export const loadResultPokemons = async function () {
     state.searchGenerations.resultPokemons = [];
     for (const id of state.searchGenerations.pokemons) {
       const data = await getPokemon(`${API_URL}pokemon/${id}/`);
-
       state.searchGenerations.resultPokemons.push({
         id: data.id,
         name: data.name,
@@ -52,6 +56,25 @@ export const loadPokemons = async function (genNumber) {
     );
     getNumberOfPages();
     console.log(state.searchGenerations.numOfPages);
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const loadPokemonDetail = async function (id) {
+  try {
+    const data = await getPokemonDetail(`${API_URL}pokemon/${id}/`);
+    state.pokemonDetail = data.map(pokemon => {
+      return {
+        id: pokemon[1].id,
+        name: pokemon[1].name,
+        types: pokemon[1].types.map(t => t.type.name),
+        image: pokemon[1].sprites.other['official-artwork'].front_default,
+        icon: pokemon[1].sprites.versions['generation-viii'].icons
+          .front_default,
+        description: pokemon[0].flavor_text_entries[0].flavor_text,
+      };
+    });
   } catch (err) {
     throw err;
   }
