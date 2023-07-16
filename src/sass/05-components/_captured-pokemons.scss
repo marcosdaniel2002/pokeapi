@@ -1,0 +1,46 @@
+.captured-pokemons {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    right: -100%;
+    height: 100%;
+    width: 80%;
+    max-width: 400px;
+    background-color: map-get($colors, 'white');
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 1s;
+    display: none;
+    &.show {
+        right: 0;
+        display: block;
+    }
+}
+.captured-card{
+    font-size: 1rem;
+    display: inline-block;
+    position: relative;
+    background-color: black;
+    &::before{
+        content: '';
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      
+        background-color: white;
+        border-radius: 50%;
+        width: toEm(40);
+        height: toEm(40);
+        
+
+        
+    }
+    &__image{
+        width: toEm(100);
+        border-radius: 50%;
+        position: relative;
+        
+    }
+
+
+}
