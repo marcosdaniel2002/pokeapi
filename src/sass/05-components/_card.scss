@@ -3,6 +3,11 @@
   justify-content: center;
   flex-wrap: wrap;
   padding: 2vw;
+
+  &__load-image {
+    width: 40%;
+    min-width: 500px;
+  }
 }
 
 .card {

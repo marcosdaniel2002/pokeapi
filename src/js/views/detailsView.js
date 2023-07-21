@@ -2,13 +2,14 @@ import { SliderView } from './sliderView';
 
 class DetailsView {
   _parentElement = document.querySelector('.slider-card-detail');
-
+  _data;
   constructor() {
     this._addHandlersCloseModal();
   }
 
   load(data, id) {
-    const arr = this._arrayOfMarkups(data);
+    this._data = data;
+    const arr = this._arrayOfMarkups(this._data);
     const index = data.findIndex(pokemon => pokemon.id == id);
     new SliderView(this._parentElement, arr, index);
     this._toggleClass();
@@ -17,7 +18,7 @@ class DetailsView {
   _arrayOfMarkups(data) {
     return data.map(
       pokemon => `
-    <div class="card-detail">
+    <div class="card-detail" data-id="${pokemon.id}">
         <button class="card-detail__btn-close">&times;</button>
         <span class="card-detail__number">#${pokemon.id
           .toString()
@@ -36,13 +37,14 @@ class DetailsView {
           .join('')}
         </div>
         <span class="card-detail__description">${pokemon.description}</span>
-        <button class="card-detail__button-capture btn-quaternary">
-            Capture
-        </button>
-        <button class="card-detail__button-release btn-primary display-none">
-            Release
-        </button>
-    </div>`
+        ${
+          pokemon.bookmark
+            ? `<button class="card-detail__button-capture btn-quaternary display-none">Capture</button>
+            <button class="card-detail__button-release btn-primary">Release</button>`
+            : `<button class="card-detail__button-capture btn-quaternary">Capture</button>
+            <button class="card-detail__button-release btn-primary display-none">Release</button>`
+        }
+      </div>`
     );
   }
 
@@ -50,6 +52,15 @@ class DetailsView {
     this._parentElement.classList.toggle('hidden');
     document.querySelector('.overlay').classList.toggle('hidden');
     document.body.classList.toggle('fixed');
+  }
+
+  _toggleButtons(parentElement) {
+    parentElement
+      .querySelector('.card-detail__button-capture')
+      .classList.toggle('display-none');
+    parentElement
+      .querySelector('.card-detail__button-release')
+      .classList.toggle('display-none');
   }
 
   _addHandlersCloseModal() {
@@ -71,6 +82,34 @@ class DetailsView {
       ) {
         this._toggleClass();
       }
+    });
+  }
+
+  addHandlerCapturePokemon(handler) {
+    this._parentElement.addEventListener('click', e => {
+      const btn = e.target.closest('.card-detail__button-capture');
+      if (!btn) return;
+
+      this._toggleButtons(btn.parentElement);
+      const { id } = btn.parentElement.dataset;
+      const pokemonCaptured = this._data.find(pokemon => pokemon.id === +id);
+      const pokemonObj = { id: pokemonCaptured.id, icon: pokemonCaptured.icon };
+
+      // resultPokemonsView.addPokeballIcon(pokemonObj.id);
+      handler(pokemonObj);
+    });
+  }
+
+  addHandlerRemovePokemon(handler) {
+    this._parentElement.addEventListener('click', e => {
+      const btn = e.target.closest('.card-detail__button-release');
+      if (!btn) return;
+
+      this._toggleButtons(btn.parentElement);
+      const { id } = btn.parentElement.dataset;
+
+      // resultPokemonsView.removePokeballIcon(id);
+      handler(+id);
     });
   }
 }

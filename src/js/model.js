@@ -17,6 +17,10 @@ export const state = {
     numOfPages: '',
   },
   pokemonDetail: [],
+  pokemonBookmarks: {
+    pokemons: [],
+    maxPokemons: 6,
+  },
 };
 
 export const loadResultPokemons = async function () {
@@ -29,6 +33,9 @@ export const loadResultPokemons = async function () {
         name: data.name,
         types: data.types.map(t => t.type.name),
         image: data.sprites.other['official-artwork'].front_default,
+        bookmark: state.pokemonBookmarks.pokemons.some(
+          bookmark => bookmark.id === data.id
+        ),
       });
     }
   } catch (err) {
@@ -73,6 +80,9 @@ export const loadPokemonDetail = async function (id) {
         icon: pokemon[1].sprites.versions['generation-viii'].icons
           .front_default,
         description: pokemon[0].flavor_text_entries[0].flavor_text,
+        bookmark: state.pokemonBookmarks.pokemons.some(
+          bookmark => bookmark.id === pokemon[1].id
+        ),
       };
     });
   } catch (err) {
@@ -92,6 +102,33 @@ const getNumberOfPages = function () {
     state.searchGenerations.pokemons.length /
       state.searchGenerations.resultsPerPage
   );
+};
+
+export const addPokemonCaptured = function (pokemonCaptured) {
+  state.pokemonBookmarks.pokemons.push(pokemonCaptured);
+
+  state.searchGenerations.resultPokemons.find(
+    pokemon => pokemon.id === pokemonCaptured.id
+  ).bookmark = true;
+};
+
+export const removePokemonCaptured = function (id, isReplace) {
+  state.searchGenerations.resultPokemons.find(
+    pokemon => pokemon.id === id
+  ).bookmark = false;
+
+  const index = state.pokemonBookmarks.pokemons.findIndex(el => el.id === id);
+
+  if (isReplace) {
+    state.pokemonBookmarks.pokemons.splice(
+      index,
+      1,
+      state.pokemonBookmarks.pokemons.splice(-1)[0]
+    );
+  } else {
+    state.pokemonBookmarks.pokemons.splice(index, 1);
+  }
+  console.log(state.pokemonBookmarks.pokemons);
 };
 
 // ([\/][0-9]{1,})

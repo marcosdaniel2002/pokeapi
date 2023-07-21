@@ -1,46 +1,87 @@
 .captured-pokemons {
+  position: absolute;
+  z-index: 1100;
+  top: 0;
+  right: -400px;
+  height: 100%;
+  width: 80%;
+  max-width: 400px;
+  background-color: map-get($colors, 'white');
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: all 1s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &.show {
+    right: 0;
+  }
+
+  &__close {
+    font-size: 1.5rem;
+    font-weight: 600;
+    $size: 25;
+    width: toEm($size);
+    height: toEm($size);
     position: absolute;
-    z-index: 100;
-    top: 0;
-    right: -100%;
-    height: 100%;
-    width: 80%;
-    max-width: 400px;
-    background-color: map-get($colors, 'white');
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    transition: all 1s;
-    display: none;
-    &.show {
-        right: 0;
-        display: block;
-    }
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+  }
 }
-.captured-card{
-    font-size: 1rem;
-    display: inline-block;
+.captured-card {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &--last-pokemon {
+    grid-column: 1 / 3;
+  }
+
+  &__container-image {
     position: relative;
-    background-color: black;
-    &::before{
-        content: '';
-        position: absolute;
-        top: 65%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      
-        background-color: white;
-        border-radius: 50%;
-        width: toEm(40);
-        height: toEm(40);
-        
+    width: fit-content;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 
-        
+      background-color: mix(white, map-get($colors, 'primary'), 60);
+      border-radius: 50%;
+      width: toEm(40);
+      height: toEm(40);
     }
-    &__image{
-        width: toEm(100);
-        border-radius: 50%;
-        position: relative;
-        
+  }
+
+  &__image {
+    width: toEm(100);
+    border-radius: 50%;
+    position: relative;
+  }
+
+  &__remove {
+    $size: 23;
+    font-size: 1.7em;
+    font-weight: 600;
+    color: map-get($colors, 'gray');
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    width: toEm($size);
+    height: toEm($size);
+    cursor: pointer;
+    transition: all 0.5s;
+    &:hover {
+      background-color: map-get($colors, 'gray');
+      color: white;
     }
-
-
+  }
 }

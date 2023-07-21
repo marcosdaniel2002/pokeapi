@@ -1,7 +1,13 @@
+import { mark } from 'regenerator-runtime';
+
 export default class View {
   _data;
 
   render(data) {
+    if (!data) {
+      this._clear();
+      return;
+    }
     this._data = data;
     const markup = this._generateMarkup();
     this._clear();
@@ -28,6 +34,12 @@ export default class View {
       <p>${message}</p>
     </div>
     `;
+    this._clear();
+    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  renderLoad() {
+    const markup = this._generateMarkupLoad();
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
