@@ -1,13 +1,6 @@
-.container-slider-2 {
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-  // position: absolute;
-  // z-index: 1000;
-}
 .slider-card-detail {
   z-index: 1000;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

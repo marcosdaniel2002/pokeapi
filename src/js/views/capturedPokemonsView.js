@@ -83,9 +83,17 @@ class CapturedPokemonView extends View {
   }
 
   _openModal() {
-    this._modal.classList.contains('show')
-      ? ''
-      : this._modal.classList.add('show');
+    if (!this._modal.classList.contains('show')) {
+      this._modal.classList.add('show');
+      document.body.style.overflowY = 'hidden';
+    }
+  }
+
+  _closeModal() {
+    if (this._modal.classList.contains('show')) {
+      this._modal.classList.remove('show');
+      document.body.style.overflowY = 'visible';
+    }
   }
 
   _timeOutShowModal() {
@@ -98,7 +106,9 @@ class CapturedPokemonView extends View {
   }
 
   _toggleShowModal() {
-    this._modal.classList.toggle('show');
+    this._modal.classList.contains('show')
+      ? this._closeModal()
+      : this._openModal();
   }
 
   _toggleOverlay() {

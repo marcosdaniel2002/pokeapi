@@ -95,7 +95,6 @@ class DetailsView {
       const pokemonCaptured = this._data.find(pokemon => pokemon.id === +id);
       const pokemonObj = { id: pokemonCaptured.id, icon: pokemonCaptured.icon };
 
-      // resultPokemonsView.addPokeballIcon(pokemonObj.id);
       handler(pokemonObj);
     });
   }
@@ -108,7 +107,6 @@ class DetailsView {
       this._toggleButtons(btn.parentElement);
       const { id } = btn.parentElement.dataset;
 
-      // resultPokemonsView.removePokeballIcon(id);
       handler(+id);
     });
   }

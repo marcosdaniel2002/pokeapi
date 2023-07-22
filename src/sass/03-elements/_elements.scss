@@ -10,6 +10,14 @@ li {
   list-style-type: none;
 }
 
+html,
 body {
   overflow-x: hidden;
+}
+// body {
+//   overflow-x: hidden;
+// }
+body {
+  position: relative;
+  height: 100vh;
 }
